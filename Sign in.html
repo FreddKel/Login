@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign In | KP</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --space-blue: #0a1f3a;
+            --neon-blue: #00f5ff;
+            --deep-purple: #6a00f4;
+            --star-yellow: #ffe700;
+            --cosmic-pink: #ff00f5;
+        }
+        
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Montserrat', sans-serif;
+            background: url('https://wallpapers.com/images/featured/cielo-estrellado-miwwlkppf78dhye1.jpg') no-repeat center center fixed;
+            background-size: cover;
+            color: white;
+            height: 100vh;
+            overflow: hidden;
+            position: relative;
+            animation: starPulse 15s infinite alternate;
+        }
+        
+        @keyframes starPulse {
+            0% { background-size: 100% auto; }
+            100% { background-size: 110% auto; }
+        }
+        
+        .stars {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+        
+        .star {
+            position: absolute;
+            background: white;
+            border-radius: 50%;
+            animation: twinkle var(--duration) infinite ease-in-out;
+        }
+        
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.2; }
+            50% { opacity: 1; }
+        }
+        
+        .login-container {
+            position: relative;
+            max-width: 450px;
+            margin: 5% auto;
+            padding: 40px;
+            background: rgba(10, 31, 58, 0.8);
+            border-radius: 15px;
+            box-shadow: 0 0 30px rgba(0, 245, 255, 0.3);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(0, 245, 255, 0.2);
+            z-index: 10;
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+        
+        .logo-container {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .logo {
+            width: 120px;
+            height: auto;
+            margin-bottom: 15px;
+            filter: drop-shadow(0 0 10px rgba(0, 245, 255, 0.7));
+        }
+        
+        h1 {
+            font-family: 'Orbitron', sans-serif;
+            text-align: center;
+            margin-bottom: 30px;
+            color: var(--neon-blue);
+            text-shadow: 0 0 10px rgba(0, 245, 255, 0.7);
+            letter-spacing: 2px;
+        }
+        
+        .input-group {
+            position: relative;
+            margin-bottom: 25px;
+        }
+        
+        .input-group label {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            color: var(--neon-blue);
+            transition: all 0.3s;
+        }
+        
+        .input-group input {
+            width: 100%;
+            padding: 15px 15px 15px 50px;
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid var(--neon-blue);
+            border-radius: 8px;
+            color: white;
+            font-size: 16px;
+            transition: all 0.3s;
+        }
+        
+        .input-group input:focus {
+            outline: none;
+            border-color: var(--cosmic-pink);
+            box-shadow: 0 0 15px rgba(255, 0, 245, 0.5);
+        }
+        
+        .input-group input:focus + label {
+            color: var(--cosmic-pink);
+        }
+        
+        .show-password {
+            position: absolute;
+            right: 15px;
+            top: 15px;
+            background: none;
+            border: none;
+            color: var(--neon-blue);
+            cursor: pointer;
+        }
+        
+        .options {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 25px;
+        }
+        
+        .remember-me {
+            display: flex;
+            align-items: center;
+        }
+        
+        .remember-me input {
+            margin-right: 8px;
+            accent-color: var(--neon-blue);
+        }
+        
+        .forgot-password {
+            color: var(--neon-blue);
+            text-decoration: none;
+        }
+        
+        .forgot-password:hover {
+            text-decoration: underline;
+            color: var(--cosmic-pink);
+        }
+        
+        .login-btn {
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(45deg, var(--deep-purple), var(--neon-blue));
+            border: none;
+            border-radius: 8px;
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+        
+        .login-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 245, 255, 0.4);
+        }
+        
+        .login-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, var(--neon-blue), var(--cosmic-pink));
+            transition: all 0.4s;
+            z-index: -1;
+        }
+        
+        .login-btn:hover::before {
+            left: 0;
+        }
+        
+        .register-link {
+            text-align: center;
+            margin-top: 20px;
+        }
+        
+        .register-link a {
+            color: var(--neon-blue);
+            text-decoration: none;
+        }
+        
+        .register-link a:hover {
+            text-decoration: underline;
+            color: var(--cosmic-pink);
+        }
+        
+
+        .shooting-star {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: white;
+            border-radius: 50%;
+            box-shadow: 0 0 10px 2px white;
+            animation: shoot 5s linear infinite;
+            opacity: 0;
+        }
+        
+        @keyframes shoot {
+            0% {
+                transform: translateX(0) translateY(0);
+                opacity: 1;
+            }
+            100% {
+                transform: translateX(1000px) translateY(-300px);
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="stars" id="stars"></div>
+        <div class="login-container">
+        <div class="logo-container">
+            <img src="https://st4.depositphotos.com/16030310/25209/v/450/depositphotos_252096832-stock-illustration-vector-illustration-blue-letters.jpg" 
+                 alt="KP Logo" 
+                 class="logo">
+            <h1>SIGN IN</h1>
+        </div>
+        
+        <form id="loginForm">
+            <div class="input-group">
+                <input type="email" id="email" placeholder=" " required>
+                <label for="email"><i class="fas fa-user-astronaut"></i> e-mail</label>
+            </div>
+            
+            <div class="input-group">
+                <input type="password" id="password" placeholder=" " required>
+                <label for="password"><i class="fas fa-lock"></i> Contraseña</label>
+                <button type="button" class="show-password" id="togglePassword">
+                    <i class="far fa-eye"></i>
+                </button>
+            </div>
+            
+            <div class="options">
+                <label class="remember-me">
+                    <input type="checkbox" id="remember"> Recordar sesión
+                </label>
+                <a href="#" class="forgot-password">¿Olvidaste tu contraseña?</a>
+            </div>
+            
+            <button type="submit" class="login-btn">
+                <i class="fas fa-rocket"></i> INICIAR SESIÓN
+            </button>
+            
+            <div class="register-link">
+                ¿No tienes cuenta? <a href="#">Regístrate aquí</a>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        function createStars() {
+            const starsContainer = document.getElementById('stars');
+            const starCount = 200;
+            
+            for (let i = 0; i < starCount; i++) {
+                const star = document.createElement('div');
+                star.className = 'star';
+                
+                const size = Math.random() * 2 + 1;
+                star.style.width = `${size}px`;
+                star.style.height = `${size}px`;  
+                star.style.left = `${Math.random() * 100}%`;
+                star.style.top = `${Math.random() * 100}%`;
+                star.style.setProperty('--duration', `${Math.random() * 5 + 3}s`);
+                star.style.animationDelay = `${Math.random() * 5}s`;
+                
+                starsContainer.appendChild(star);
+            }
+                setInterval(() => {
+                const shootingStar = document.createElement('div');
+                shootingStar.className = 'shooting-star';
+                shootingStar.style.left = `${Math.random() * 20}%`;
+                shootingStar.style.top = `${Math.random() * 20}%`;
+                document.body.appendChild(shootingStar);
+                
+                setTimeout(() => {
+                    shootingStar.remove();
+                }, 5000);
+            }, 3000);
+        }
+        
+        function setupPasswordToggle() {
+            const toggleBtn = document.getElementById('togglePassword');
+            const passwordInput = document.getElementById('password');
+            
+            toggleBtn.addEventListener('click', () => {
+                const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+                passwordInput.setAttribute('type', type);
+                toggleBtn.innerHTML = type === 'password' ? '<i class="far fa-eye"></i>' : '<i class="far fa-eye-slash"></i>';
+            });
+        }
+            function setupFloatingEffect() {
+            const loginContainer = document.querySelector('.login-container');
+            let floatDirection = 1;
+            
+            setInterval(() => {
+                const currentTransform = loginContainer.style.transform || 'translateY(0px)';
+                const currentY = parseInt(currentTransform.match(/translateY\((-?\d+)px\)/)[1]) || 0;
+                
+                if (Math.abs(currentY) >= 20) {
+                    floatDirection *= -1;
+                }
+                
+                loginContainer.style.transform = `translateY(${currentY + floatDirection}px)`;
+            }, 100);
+        }
+        
+        function setupFormValidation() {
+            const form = document.getElementById('loginForm');
+            
+            form.addEventListener('submit', (e) => {
+                e.preventDefault();
+                
+                const email = document.getElementById('email').value;
+                const password = document.getElementById('password').value;
+                
+                if (!email || !password) {
+                    alert('Por favor completa todos los campos');
+                    return;
+                }
+                
+                const btn = form.querySelector('button[type="submit"]');
+                btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> INICIANDO...';
+                btn.disabled = true;
+                
+                setTimeout(() => {
+                    alert('Invalid credentials given');
+                    btn.innerHTML = '<i class="fas fa-rocket"></i> INICIAR SESIÓN';
+                    btn.disabled = false;
+                }, 1500);
+            });
+        }
+        
+        document.addEventListener('DOMContentLoaded', () => {
+            createStars();
+            setupPasswordToggle();
+            setupFloatingEffect();
+            setupFormValidation();
+        });
+    </script>
+</body>
+</html>
